@@ -1,0 +1,16 @@
+<div class="card app-card" >
+    <img class="card-img-top" src="../../assets/img/matriz.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{algoritmo.nombre}}</h5>
+      <p class="card-text">{{algoritmo.descripcion}}.</p>
+      <div class="btn-group btn-group-lg text-center w-100">
+          <button type="button" class="btn btn-outline-primary w-100" routerLink="/trabajos/algoritmo/{{algoritmo._id}}">Editar</button>
+          <button type="button" class="btn btn-outline-success w-100" routerLink="/trabajos/ejecucion/{{algoritmo._id}}">Ejecutar</button>
+          <button type="button" class="btn btn-outline-danger w-100">Eliminar</button>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+        Creado por <cite title="Source Title">{{algoritmo.autor}}</cite>
+    </div>
+</div>
+

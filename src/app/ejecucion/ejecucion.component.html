@@ -1,0 +1,59 @@
+<div class="card content-body">
+    <div class="card-body">
+      <h5 class="card-title">{{algoritmo.nombre}}</h5>
+  
+    </div>
+  
+    <div class="dropdown-divider"></div>
+  
+    <div>
+      <h3 class="text-center">Tipos de Ejecucion <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal" (click)="generarDatos()">Crear Datos</button>
+      </h3>
+      <div class="content-body text-center">
+
+      </div>
+      <div class="content-body text-center">
+        <nav aria-label="...">
+          <ul class="pagination pagination-lg">
+            <span></span>
+            <li class="page-item" *ngFor="let implementacion of implementaciones; let i = index" (click)="seleccionarImplementacion(implementacion, i)">
+              <a class="page-link">{{implementacion}}</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div *ngIf="seleccionado != null">
+        <div class="dropdown-divider"></div>
+  
+        <div class="content-body">
+          <h5 class="card-title">{{implementacion.tipo}}</h5>
+
+          <div>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Metricas</span>
+              </div>
+              <div #chart>
+                  
+              </div>
+            </div>
+            <br>
+          </div>
+
+          <div class="actions content-body text-right">
+            <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#modal" (click)="ejecutar()">Compilar y Ejecutar</button>
+          </div>
+        </div>
+
+      </div>
+  
+    </div>
+  </div>
+
+  <div class="content-body text-center">
+    <!--div class="progress" style="height: 40px;">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+          <span class="h6" style="margin: 0px!important">{{estado}}<span class="dotdotdot"></span></span>
+        </div>
+    </div-->
+  </div>

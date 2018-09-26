@@ -1,0 +1,33 @@
+<div class="card app-card" [ngStyle]="{'background-color': computador.color}">
+  <img class="card-img-top" src="../../assets/img/polygon.png" alt="Card image cap" style="max-width: 400px">
+  <div class="card-body">
+    <h5 class="card-title">{{computador.nombre}}</h5>
+    <p class="card-text">{{computador.ip}}</p>
+    <p class="card-text" *ngIf="computador.respuesta">{{computador.respuesta}}</p>
+    <div class="card-text" *ngIf="computador.res">
+      <div><b>Sistema:</b>{{computador.sistema}}</div>
+      <div>
+        <b>CPU:</b>{{computador.cpu}}
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" [ngStyle]="{'width': computador.res.cpu.usada}" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">{{computador.res.cpu.usada}}</div>
+        </div>
+      </div>
+
+      <div class="card-text" *ngIf="computador.res">
+        <b>Memoria:</b>{{computador.memoria}}
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" [ngStyle]="{'width': computador.res.memoria.usada}" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">{{computador.res.memoria.usada}}</div>
+        </div>
+      </div>
+
+    </div>
+    <!--div class="btn-group btn-group-lg text-center w-100">
+        <button type="button" class="btn btn-outline-primary w-100" routerLink="/trabajos/algoritmo/{{computador._id}}">Editar</button>
+        <button type="button" class="btn btn-outline-success w-100" routerLink="/trabajos/ejecucion/{{computador._id}}">Ejecutar</button>
+        <button type="button" class="btn btn-outline-danger w-100">Eliminar</button>
+    </div-->
+  </div>
+  <div class="card-footer text-muted">
+      Creado por <cite title="Source Title">Olivares Juan Ignacio</cite>
+  </div>
+</div>

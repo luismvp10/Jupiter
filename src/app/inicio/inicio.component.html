@@ -1,0 +1,239 @@
+<div class="content-inicio">
+  <div class="jumbotron">
+      <h1 class="display-4 title-inicio">{{title}}</h1>
+      <hr class="my-4">
+      <h1>MPI (Message Passing Interface)</h1>
+
+      <p>MPI es un mecanismo para la programación paralela por paso de mensajes. 
+      Por ello, no es necesario que todos los procesos MPI ejecuten en el mismo nodo. 
+      El número de procesos MPI se controla con la directiva #@ total_tasks y cada uno ejecuta siempre en un core distinto. 
+      En el jobfile, la llamada a run hace que se lancen el número de procesos definido en #@ total_tasks, cada uno de los cuales ejecuta el programa especificado.
+      </p>
+        
+      <h1>OpenMP (Open Multi-Processing)</h1>
+      <p>OpenMP es un API para C/C++ y Fortran para la programación paralela de memoria compartida. 
+      Esto quiere decir que todos los hilos en los que OpenMP divide el programa comparten memoria RAM. 
+      Por tanto, es necesario que todos los hilos se estén ejecutando en el mismo nodo.
+      El número de hilos de cada proceso MPI se controla con la directiva #@ cpus_per_task. 
+      </p>
+      
+      <h1> MPI VS OpenMP</h1>
+
+      <table class="table table-bordered table-hover table-light">
+          <thead class="thead-dark">
+              <tr>
+                <th scope="col">MPI</th>
+                <th scope="col">OpenMP</th>
+              </tr>
+            </thead>
+          <tr >
+            <td >
+              Disponible de diferentes proveedores y se
+              puede compilar en la plataforma deseada con el compilador
+              deseado.Se puede usar cualquiera de las API de MPI, es
+              decir, MPICH, OpenMPI u otra.
+            </td>
+            <td>
+              OpenMP están enganchados con el compilador de
+              manera con el compilador GNU y con Intel compilador tienen una
+              aplicación específica.El usuario está en libertad con el
+              cambio de compilador pero no con la implementación de openmp.
+            </td>
+          </tr>
+          <tr >
+            <td >
+              Soporte MPI C, C ++ y FORTRAN.
+            </td>
+            <td >
+              Soporte OPEN C, C ++ y FORTRAN.
+            </td>
+          </tr>
+          <tr >
+            <td >
+              OpenMPI uno de API para MPI proporciona soporte provisional para Java.
+            </td>
+            <td >
+              Algunos proyectos intentan replicar openmp para Java.
+            </td>
+          </tr>
+          <tr >
+            <td >
+              MPI se dirige tanto al sistema de memoria
+              compartida como a la compartida.
+            </td>
+            <td >
+              OpenMP objetivo solo sistema de memoria compartida.
+            </td>
+          </tr>
+          <tr >
+            <td >
+              Basado tanto en el enfoque
+              basado en procesos como en el hilo. (Anteriormente era
+              principalmente el paralelismo basado en procesos pero ahora con
+              MPI 2 y 3 el paralelismo basado en hilos también existe.
+              Generalmente, un proceso puede contener más de 1 hilo y llamar a
+              la subrutina MPI como se desee.
+            </td>
+            <td >
+              Solo paralelismo basado en hilo.
+            </td>
+          </tr>
+          <tr>
+            <td >
+              La sobrecarga para crear el proceso es una
+              vez.
+            </td>
+            <td >
+              Dependiendo de la implementación, los
+              subprocesos se pueden crear y unir para tareas particulares que
+              agregan gastos generales.
+            </td>
+          </tr>
+          <tr >
+            <td >
+              Hay gastos generales asociados con la
+              transferencia de mensajes de un proceso a otro.
+              
+            </td>
+            <td >
+              No hay tales gastos generales, como el hilo
+              puede compartir variables.
+            </td>
+          </tr>
+          <tr >
+            <td >
+              El proceso en MPI solo tiene variable
+              privada, no hay variable compartida.
+            </td>
+            <td>
+              En OpenMP, los hilos tienen variables
+              tanto privadas como compartidas.
+            </td>
+          </tr>
+          <tr >
+            <td >
+              La carrera de datos no está allí si no se usa cualquier hilo en proceso.
+            </td>
+            <td >
+              La carrera de datos es inherente al modelo OpenMP.
+            </td>
+          </tr>
+          <tr >
+            <td >
+              La compilación del programa MPI requiere 1. Agregar archivo de encabezado: #include
+              &quot;mpi.h&quot; 2. compilador como: (en linux)
+              ++ mpi.cxx -o mpiExe.
+              El usuario debe
+              establecer la variable de entorno PATH y LD_LIBRARY_PATH en MPI
+              como una carpeta o binarios instalados en OpenMPI) (para Linux).
+            </td>
+            <td>
+              Necesita agregar omp.h y luego puede compilar código directamente con  -fopenmp en un entorno Linux
+             g ++ -fopenmp openmp.cxx -o openmpExe.
+            </td>
+          </tr>
+          <tr >
+            <td >
+              Ejecutando el programa MPI.
+              a) El usuario debe asegurarse de
+              que el bin y la carpeta de la biblioteca de la instalación de MPI
+              estén incluidos en la variable de entorno PATH y
+              LD_LIBRARY_PATH.
+              b) Para ejecutar el ejecutable
+              desde la línea de comandos, el usuario debe proporcionar el
+              siguiente comando y especifique el número de procesador,
+              como en el ejemplo siguiente, es cuatro.
+              Mpicc  mpiorder.c -o mpiorder.
+            </td>
+            <td>
+              El usuario puede ejecutar ejecutable openmpExe de manera normal.
+        <br/>
+         gcc -o open -fopenmp open.c
+            </td>
+          </tr>
+          <tr >
+            <td >
+              mpirun -np 4 mpiExe
+            </td>
+            <td>
+              ./openmpExe 
+            </td>
+          </tr>
+        </table>
+
+        <p>
+            MPI
+            y OpenMP tienen sus propias ventajas y limitaciones.&nbsp;OpenMP es
+            relativamente fácil de implementar e implica pocas directivas pragma
+            para lograr las tareas deseadas.&nbsp;OpenMP también se puede
+            utilizar en la función recursiva, es decir, como un recorrido en
+            árbol binario.&nbsp;Sin embargo, adolece del problema de las
+            limitaciones de memoria para los cálculos intensivos de memoria.</p>
+            <p>
+            MPI
+            suele servir bien a esos problemas, que implican gran cantidad de
+            memoria.&nbsp;Con MPI 3, la ventaja de la memoria compartida se puede
+            utilizar dentro de MPI también.&nbsp;También se puede usar OpenMP
+            con MPI, es decir, para la memoria compartida en la plataforma
+            específica OpenMP se puede usar, mientras que para la distribuida se
+            puede usar MPI.</p>
+      <hr class="my-4">
+
+      <div class="card" >
+        
+        <div class="card-body">
+          <h5 class="card-title">Ordenamiento</h5>
+          <p class="card-text">Metricas.</p>
+          <hr class="my-4">
+          <div #chart1>
+          </div>
+    
+          <div #chart2>
+                      
+          </div>
+        </div>
+      </div>
+      
+      <div class="card" >
+        
+        <div class="card-body">
+          <h5 class="card-title">Matriz x Vector</h5>
+          <p class="card-text">Metricas.</p>
+          <hr class="my-4">
+          <div #chart3>
+                  
+          </div>
+    
+          <div #chart4>
+                      
+          </div>
+        </div>
+      </div>
+
+      <div class="card" >
+        
+        <div class="card-body">
+          <h5 class="card-title">Suma de prefijos</h5>
+          <p class="card-text">Metricas.</p>
+          <hr class="my-4">
+          <div #chart5>
+                  
+          </div>
+    
+          <div #chart6>
+                      
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <p>En este trabajo participaron los estudiantes:</p>
+      <ul>
+        <li *ngFor="let alumno of alumnos">
+          <b>{{alumno.nombre}}</b>: {{alumno.registro}}
+        </li>
+      </ul>
+      
+  </div>
+</div>

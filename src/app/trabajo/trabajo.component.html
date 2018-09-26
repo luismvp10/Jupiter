@@ -1,0 +1,62 @@
+<div class="card content-body">
+  <div class="card-body">
+    <h5 class="card-title">Algortimos</h5>
+    <p class="card-text">Seleccione, agrege o modifique algun algoritmo.</p>
+  </div>
+  <div class="dropdown-divider"></div>
+  <div>
+    <h3 class="text-center">Seleccione algun algortimo</h3>
+    <div class="card-group content-cards-app">
+      <app-algoritmo [algoritmo]="alg" *ngFor="let alg of algs" style="margin: 10px"></app-algoritmo>
+    </div>
+  </div>
+
+
+
+
+</div>
+<div class="actions content-body">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">Agregar Algoritimo</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Agregar Algoritmo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <h4>Momentaneamente la Funcion no esta disponible.</h4>
+        <br>
+        <form>
+
+          <div class="form-group">
+            <label for="nombre">Nombre del Algoritmo</label>
+            <input type="text" class="form-control" id="nombre" aria-describedby="help" placeholder="Nombre del Algoritmo" [(ngModel)]="aux.nombre" name="nombre">
+          </div>
+
+          <div class="form-group">
+            <label for="autor">Autor del Algoritmo</label>
+            <input type="text" class="form-control" id="autor" aria-describedby="help" placeholder="Autor del Algoritmo" [(ngModel)]="aux.autor" name="autor">
+          </div>
+
+          <div class="form-group">
+            <label for="descripcion">Descripcion</label>
+            <textarea class="form-control" id="descripcion" rows="3"  [(ngModel)]="aux.descripcion" name="descripcion"></textarea>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeBtn>Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="agregar()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>

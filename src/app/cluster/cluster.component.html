@@ -1,0 +1,60 @@
+<div class="card content-body">
+  <div class="card-body">
+    <h5 class="card-title">Configuracion del Cluster</h5>
+    <p class="card-text">Esta configuracion es usada para ejecutar los programas que necesitan un cluster como MPI. Este tipo de manejo automatico brinda algunas funcionalidades como:</p>
+    <ul>
+      <li>1- Configuracion automatica de la red.</li>
+      <li>2- Distribucion de Carga y Carga Balanceada.</li>
+    </ul>
+  </div>
+  <div class="dropdown-divider"></div>
+  <div>
+    <h3 class="text-center">Testeo de la Red 
+      <button type="button" class="btn btn-warning" (click)="testearRed()">Testear</button>
+    </h3>
+    <div class="card-group content-cards-app">
+      <app-cluster-node-card [computador]="pc" *ngFor="let pc of cluster" style="margin: 10px"></app-cluster-node-card>
+    </div>
+  </div>
+
+
+
+
+</div>
+<div class="actions content-body">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">Agregar Computador al Cluster</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Agregar Computador</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <div class="form-group">
+            <label for="nombre">Nombre de la PC</label>
+            <input type="text" class="form-control" id="nombre" aria-describedby="help" placeholder="Nombre de la PC" [(ngModel)]="aux.nombre" name="nombre">
+          </div>
+
+          <div class="form-group">
+            <label for="ip">IP de la PC</label>
+            <input type="text" class="form-control" id="ip" aria-describedby="help" placeholder="IP de la PC" [(ngModel)]="aux.ip" name="ip">
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeBtn>Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="agregar()">Agregar</button>
+      </div> 
+    </div>
+  </div>
+</div>
